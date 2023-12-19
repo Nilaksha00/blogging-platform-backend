@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema, Model } from "mongoose";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 
 interface User extends Document {
   fullName: string;
