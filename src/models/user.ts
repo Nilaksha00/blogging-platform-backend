@@ -2,7 +2,7 @@ import { InferSchemaType, Schema, model } from "mongoose";
 
 const userSchema = new Schema(
   {
-    fullName: {
+    userName: {
       type: String,
       required: true,
       trim: true,
