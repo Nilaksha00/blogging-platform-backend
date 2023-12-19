@@ -1,13 +1,6 @@
-import mongoose, { Document, Schema, Model } from "mongoose";
-// import bcrypt from "bcrypt";
+import { InferSchemaType, Schema, model } from "mongoose";
 
-interface User extends Document {
-  fullName: string;
-  email: string;
-  password: string;
-}
-
-const userSchema = new Schema<User>(
+const userSchema = new Schema(
   {
     fullName: {
       type: String,
@@ -31,22 +24,6 @@ const userSchema = new Schema<User>(
   { timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    next();
-  }
+type User = InferSchemaType<typeof userSchema>;
 
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
-
-userSchema.methods.comparePassword = async function (enteredPassword: string) {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
-
-const UserModel: Model<User> = mongoose.model<User>(
-  "Users",
-  userSchema
-);
-
-export default UserModel;
+export default model<User>("User", userSchema);

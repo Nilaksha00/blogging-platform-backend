@@ -1,10 +1,14 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import blogsRoutes from "./routes/blogsRoutes";
+import usersRoutes from "./routes/usersRoutes";
 
 const app = express();
 
 app.use(express.json());
+
+//user routes
+app.use("/api/users", usersRoutes);
 
 // blogs routes
 app.use("/api/blogs", blogsRoutes);
