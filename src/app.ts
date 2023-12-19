@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
-import blogsRoutes from "./routes/blogsRoutes";
-import usersRoutes from "./routes/usersRoutes";
+import blogsRoutes from "./routes/blogs";
+import usersRoutes from "./routes/users";
 
 const app = express();
 

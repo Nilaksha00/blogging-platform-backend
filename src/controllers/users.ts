@@ -23,22 +23,7 @@ export const signUp: RequestHandler = async (req, res, next) => {
       password: passwordHashed,
     });
 
-    const token = jwt.sign(
-      { _id: newUser?._id, email: newUser?.email },
-      process.env.SECRET_KEY as string,
-      {
-        expiresIn: "1d",
-      }
-    );
-
-    res.status(200).json({
-      status: 201,
-      user: newUser,
-      message: "User Registered Successfully",
-      token: token,
-    });
-
-    // res.status(201).json(newUser);
+    res.status(201).json(newUser);
   } catch (error) {
     next(error);
   }
