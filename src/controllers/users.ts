@@ -5,11 +5,11 @@ import UserModel from "../models/user";
 
 // User signup controller
 export const signUp: RequestHandler = async (req, res, next) => {
-  const { userName, email } = req.body;
+  const { fullName, email } = req.body;
   const passwordRaw = req.body.password;
 
   try {
-    if (!passwordRaw || !userName || !email) {
+    if (!passwordRaw || !fullName || !email) {
       throw new Error("Missing Parameters");
     }
 
@@ -19,7 +19,7 @@ export const signUp: RequestHandler = async (req, res, next) => {
     const passwordHashed = await bcrypt.hash(passwordRaw, 10);
 
     const newUser = await UserModel.create({
-      userName: userName,
+      fullName: fullName,
       email: email,
       password: passwordHashed,
     });
