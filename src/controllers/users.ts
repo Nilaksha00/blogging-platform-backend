@@ -3,6 +3,7 @@ import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/user";
 
+// User signup controller
 export const signUp: RequestHandler = async (req, res, next) => {
   const { fullName, email } = req.body;
   const passwordRaw = req.body.password;
@@ -29,6 +30,7 @@ export const signUp: RequestHandler = async (req, res, next) => {
   }
 };
 
+// User signin controller
 export const signIn: RequestHandler = async (req, res, next) => {
   const { email } = req.body;
   const passwordRaw = req.body.password;
@@ -39,11 +41,12 @@ export const signIn: RequestHandler = async (req, res, next) => {
     }
 
     const user = await UserModel.findOne({ email: email }).exec();
-    if (!user) throw new Error("User not found");
+    if (!user) throw new Error("User Not Found");
 
     const passwordMatch = await bcrypt.compare(passwordRaw, user.password);
-    if (!passwordMatch) throw new Error("Invalid password");
+    if (!passwordMatch) throw new Error("Invalid Password");
 
+    // JWT token generation
     const token = jwt.sign(
       { _id: user?._id, email: user?.email },
       process.env.SECRET_KEY as string,

@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import BlogModel from "../models/blog";
 
+// Get all blogs controller
 export const getBlogs: RequestHandler = async (req, res, next) => {
   try {
     const blogs = await BlogModel.find({}).exec();
@@ -10,6 +11,7 @@ export const getBlogs: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Get single blog controller
 export const getBlog: RequestHandler = async (req, res, next) => {
   const blogId = req.params.blogId;
   try {
@@ -20,6 +22,7 @@ export const getBlog: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Create blog controller
 export const createBlog: RequestHandler = async (req, res, next) => {
   const { title, author, content } = req.body;
 
@@ -35,6 +38,7 @@ export const createBlog: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Update blog controller
 export const updateBlog: RequestHandler = async (req, res, next) => {
   const blogId = req.params.blogId;
   const { title, author, content } = req.body;
@@ -52,6 +56,7 @@ export const updateBlog: RequestHandler = async (req, res, next) => {
   }
 };
 
+// Delete blog controller
 export const deleteBlog: RequestHandler = async (req, res, next) => {
   const blogId = req.params.blogId;
 

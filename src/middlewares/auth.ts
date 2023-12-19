@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
+// Middleware to verify token 
 const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   try {
     let token = req.headers.authorization;
